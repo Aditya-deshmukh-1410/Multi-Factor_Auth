@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+
+        <div class="logo">🛡️</div>
+
+        <h1>Create Account</h1>
+
+        <p class="subtitle">
+            Set up your account and security credentials.
+        </p>
+
+        <form action="/register" method="POST">
+
+            <label>Username</label>
+            <input
+                type="text"
+                name="username"
+                placeholder="Choose a username"
+                required
+            >
+
+            <label>Email</label>
+            <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+            >
+
+            <label>Password</label>
+            <input
+                type="password"
+                name="password"
+                placeholder="Create a password"
+                required
+            >
+
+            <label>Security Question</label>
+            <select name="security_question" required>
+                <option value="">Select a question</option>
+                <option>What is your favorite color?</option>
+                <option>What is your favorite food?</option>
+                <option>What is your pet's name?</option>
+            </select>
+
+            <label>Security Answer</label>
+            <input
+                type="text"
+                name="security_answer"
+                placeholder="Enter your answer"
+                required
+            >
+
+            <button type="submit">
+                Create Account
+            </button>
+
+        </form>
+
+        <div class="link">
+            Already have an account?
+            <a href="/login.html">Sign in</a>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

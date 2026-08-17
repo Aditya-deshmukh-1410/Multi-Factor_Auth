@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Verification</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+
+        <div class="security-icon">🔑</div>
+
+        <h1>Security Question</h1>
+
+        <p class="subtitle">
+            Answer your security question to continue.
+        </p>
+
+        <div class="steps">
+            <div class="step done">✓</div>
+            <div class="step done">✓</div>
+            <div class="step active">3</div>
+            <div class="step">4</div>
+            <div class="step">5</div>
+        </div>
+
+        <p id="question" class="subtitle">
+            Loading question...
+        </p>
+
+        <form action="/verify-security" method="POST">
+
+            <label>Your Answer</label>
+
+            <input
+                type="text"
+                name="answer"
+                placeholder="Enter your answer"
+                required
+            >
+
+            <button type="submit">
+                Verify Answer
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
+<script>
+    fetch("/security-question")
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("question").innerText =
+                data.question;
+        });
+</script>
+
+</body>
+</html>

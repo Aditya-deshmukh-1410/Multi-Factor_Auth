@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAPTCHA Verification</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+
+        <div class="security-icon">🤖</div>
+
+        <h1>CAPTCHA Verification</h1>
+
+        <p class="subtitle">
+            Enter the characters shown below to continue.
+        </p>
+
+        <div class="steps">
+            <div class="step done">✓</div>
+            <div class="step done">✓</div>
+            <div class="step done">✓</div>
+            <div class="step active">4</div>
+            <div class="step">5</div>
+        </div>
+
+        <div id="captcha" class="captcha-box">
+            Loading...
+        </div>
+
+        <form action="/verify-captcha" method="POST">
+
+            <label>Enter CAPTCHA</label>
+
+            <input
+                type="text"
+                name="captcha"
+                placeholder="Enter the characters"
+                required
+            >
+
+            <button type="submit">
+                Verify CAPTCHA
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
+<script>
+    fetch("/captcha-value")
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("captcha").innerText =
+                data.captcha;
+        });
+</script>
+
+</body>
+</html>

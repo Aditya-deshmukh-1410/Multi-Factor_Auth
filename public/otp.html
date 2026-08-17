@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+
+        <div class="security-icon">📧</div>
+
+        <h1>Email Verification</h1>
+
+        <p class="subtitle">
+            We've sent a 6-digit verification code
+            to your registered email address.
+        </p>
+
+        <div class="steps">
+            <div class="step done">✓</div>
+            <div class="step active">2</div>
+            <div class="step">3</div>
+            <div class="step">4</div>
+            <div class="step">5</div>
+        </div>
+
+        <form action="/verify-otp" method="POST">
+
+            <label>Verification Code</label>
+
+            <input
+                type="text"
+                name="otp"
+                placeholder="Enter 6-digit OTP"
+                maxlength="6"
+                required
+            >
+
+            <button type="submit">
+                Verify Code
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>

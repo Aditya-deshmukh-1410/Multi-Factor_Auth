@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authenticator Verification</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+
+        <div class="security-icon">📱</div>
+
+        <h1>Authenticator</h1>
+
+        <p class="subtitle">
+            Open Google Authenticator and enter
+            the 6-digit verification code.
+        </p>
+
+        <div class="steps">
+            <div class="step done">✓</div>
+            <div class="step done">✓</div>
+            <div class="step done">✓</div>
+            <div class="step done">✓</div>
+            <div class="step active">5</div>
+        </div>
+
+        <form action="/verify-totp" method="POST">
+
+            <label>Authenticator Code</label>
+
+            <input
+                type="text"
+                name="token"
+                placeholder="Enter 6-digit code"
+                maxlength="6"
+                required
+            >
+
+            <button type="submit">
+                Verify Code
+            </button>
+
+        </form>
+
+        <p class="link">
+            Open your Google Authenticator app
+        </p>
+
+    </div>
+</div>
+
+</body>
+</html>

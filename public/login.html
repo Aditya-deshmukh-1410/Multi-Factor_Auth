@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Login</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+
+        <div class="logo">🔐</div>
+
+        <h1>Secure Login</h1>
+
+        <p class="subtitle">
+            Sign in to continue with multi-factor authentication.
+        </p>
+
+        <form action="/login" method="POST" id="loginForm">
+
+            <label>Username</label>
+            <input
+                type="text"
+                name="username"
+                placeholder="Enter your username"
+                required
+            >
+
+            <label>Password</label>
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+                required
+            >
+
+            <button type="submit" id="loginButton">
+                Continue
+            </button>
+
+        </form>
+
+        <div class="link">
+            Don't have an account?
+            <a href="/register.html">Create account</a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById("loginForm");
+    const button = document.getElementById("loginButton");
+
+    form.addEventListener("submit", () => {
+        button.disabled = true;
+
+        button.innerHTML = `
+            <span class="spinner"></span>
+            Signing in...
+        `;
+    });
+</script>
+
+</body>
+</html>
