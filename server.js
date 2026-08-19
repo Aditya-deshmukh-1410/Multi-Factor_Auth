@@ -7,6 +7,8 @@ const dotenv = require("dotenv");
 const session = require("express-session");
 const MySQLStore = require('express-mysql-session')(session);
 const nodemailer = require("nodemailer");
+const dns = require('dns');
+dns.setDefaultResultOrder('ipv4first');
 
 dotenv.config();
 
