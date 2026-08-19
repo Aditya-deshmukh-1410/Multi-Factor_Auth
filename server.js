@@ -67,7 +67,7 @@ const transporter = nodemailer.createTransport({
 });
 
 app.get("/", (req, res) => {
-    res.send("MFA Server is running!");
+    res.redirect("/register.html");
 });
 
 app.post("/register", async (req, res) => {
