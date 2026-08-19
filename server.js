@@ -5,6 +5,7 @@ const speakeasy = require("speakeasy");
 const QRCode = require("qrcode");
 const dotenv = require("dotenv");
 const session = require("express-session");
+const MySQLStore = require('express-mysql-session')(session);
 const nodemailer = require("nodemailer");
 
 dotenv.config();
@@ -14,30 +15,47 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(express.static("public"));
-app.use(
-    session({
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: false
-    })
-);
 
-
-
-const db = mysql.createConnection({
+// 1. Setup Database Connection Options
+const dbOptions = {
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
-});
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT || 3306,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+};
 
-db.connect((err) => {
+// 2. Create the MySQL Pool
+const db = mysql.createPool(dbOptions);
+
+// 3. Initialize the MySQL Session Store
+// We pass it the options and tell it to use our existing db pool
+const sessionStore = new MySQLStore(dbOptions, db);
+
+app.use(
+    session({
+        key: 'mfa_session_cookie',
+        secret: process.env.SESSION_SECRET,
+        store: sessionStore,
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+             maxAge: 1000 * 60 * 60 * 24 // Sets session to expire in 1 day
+        }
+    })
+);
+
+// 5. Test the pool connection
+db.getConnection((err, connection) => {
     if (err) {
-        console.log("MySQL connection failed:", err.message);
+        console.error("MySQL pool connection failed:", err.message);
         return;
     }
-
-    console.log("MySQL connected successfully!");
+    console.log("MySQL pool connected successfully!");
+    connection.release();
 });
 
 const transporter = nodemailer.createTransport({
