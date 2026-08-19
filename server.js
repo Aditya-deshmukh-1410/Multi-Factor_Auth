@@ -63,14 +63,15 @@ db.getConnection((err, connection) => {
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
-    secure: true, // true for port 465
+    secure: true, 
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
     },
     tls: {
-        rejectUnauthorized: false // Helps prevent certificate errors in cloud environments
-    }
+        rejectUnauthorized: false 
+    },
+    family: 4 // This strictly forces IPv4 and stops the ENETUNREACH crash
 });
 
 app.get("/", (req, res) => {
